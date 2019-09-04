@@ -1,5 +1,5 @@
 <template lang="html">
-  <form id="guest-add-form">
+  <form id="guest-add-form" v-on:submit="handleAddSubmit">
     <h2>Add a new guest:</h2>
 
     <div class="formItem">
@@ -31,6 +31,21 @@ export default {
       email: "",
       checkIn: false
     }
+  },
+  methods: {
+    handleAddSubmit(e){
+      e.preventDefault();
+
+      const guest = {
+        name: this.name,
+        email: this.email,
+        checkIn: this.checkIn
+      }
+
+      //fetch request to POST
+
+    }
+
   }
 }
 </script>
