@@ -1,12 +1,19 @@
 <template lang="html">
   <div id="guest-list">
-    <select v-model="selectedChoice" v-on:select="toggleList">
+    <h3>Please selected type of guests:</h3>
+    <select v-model="selectedChoice" v-on:change="toggleList">
       <option >All</option>
       <option >Checked-In</option>
     </select>
-    <div class="booking" v-for= "(guest, index) of guests" :key="index">
-      <GuestCard :guest="guest"/>
+
+    <div v-if= "checkedInSelected" class="checkedInListItem" v-for="(guest, index) of checkedInGuests" :key="index">
+      <GuestCard :guest="guest" />
     </div>
+
+    <div v-if="!checkedInSelected" class="allListItem" v-for= "(guest, index) of guests" :key="index">
+      <GuestCard :guest="guest" />
+    </div>
+
   </div>
 </template>
 
@@ -22,13 +29,22 @@ export default {
       checkedInSelected: false
     }
   },
+  computed: {
+    checkedInGuests(){
+      this.guests.map((guest) => {
+        return guest.checkedIn
+      })
+    }
+  },
   components: {
     GuestCard
   },
   methods: {
     toggleList(){
       if (this.selectedChoice === "All"){
-
+        this.checkedInSelected = false;
+      } else if (this.selectedChoice === "Checked-In") {
+        this.checkedInSelected = true;
       }
     }
   }
@@ -39,9 +55,12 @@ export default {
 #guest-list{
   margin: 1em 0 auto;
   display: flex;
-  flex: 1;
+  min-height:60vh;
   flex-direction: column;
   background-color: lightpink;
+}
+h3{
+  margin: 0 auto;
 }
 select{
   width: 30%;
