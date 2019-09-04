@@ -4,12 +4,12 @@
 
     <div class="formItem">
       <label for="name">Enter name:</label>
-      <input type="text" id="name" v-model="name">
+      <input required type="text" id="name" v-model="name">
     </div>
 
     <div class="formItem">
       <label for="email">Enter email address:</label>
-      <input type="text" id="email" v-model="email">
+      <input required type="email" id="email" v-model="email">
     </div>
 
     <div class="formItem">
