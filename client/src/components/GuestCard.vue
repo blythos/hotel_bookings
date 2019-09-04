@@ -14,6 +14,7 @@
 export default {
   name: "guest-card",
   props: ["guest"]
+
 }
 </script>
 

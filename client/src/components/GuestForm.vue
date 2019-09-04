@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import Service from '@/services/Service.js'
+import {eventBus} from '@/main.js'
 export default {
   name: "guest-form",
   data(){
@@ -41,9 +43,9 @@ export default {
         email: this.email,
         checkedIn: this.checkedIn
       }
-
-      //fetch request to POST
-
+      console.log(guest);
+      Service.addGuest(guest)
+      .then(res => eventBus.$emit('guest-added', res))
 
       this.name = this.email = "";
       this.checkedIn=false;

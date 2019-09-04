@@ -9,8 +9,10 @@
 </template>
 
 <script>
+import Service from "./services/Service.js"
 import GuestForm from './components/GuestForm';
 import GuestsList from './components/GuestsList';
+import {eventBus} from '@/main.js'
 
 export default {
   name: 'app',
@@ -18,6 +20,14 @@ export default {
     return{
       guests: []
     }
+  },
+  mounted() {
+    Service.getGuests()
+    .then(guests => this.guests = guests)
+
+    eventBus.$on('guest-added', (guest) => {
+      this.guests.push(guest)
+    })
   },
   components:{
     GuestForm,
