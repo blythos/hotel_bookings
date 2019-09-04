@@ -10,11 +10,18 @@ export default {
       method: 'POST',
       body: JSON.stringify(payload),
       headers: { 'Content-Type': 'application/json'}
-    }).then(res => res.json())
+    }).then(res => res.json());
   },
   deleteGuest(id) {
     return fetch(baseURL + id, {
       method: 'DELETE'
-    })
+    });
+  },
+  editGuest(payload) {
+    return fetch(baseURL + id, {
+      method: 'UPDATE',
+      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/json'}
+    }).then(res => res.json());
   }
 }
