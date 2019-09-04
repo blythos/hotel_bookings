@@ -7,18 +7,34 @@
       <p v-if="guest.checkedIn">Yes!</p>
       <p v-if="!guest.checkedIn">Not yet...</p>
     </div>
-    <button v-if="!guest.checkedIn" @click="changeStatus">Check in</button>
-    <button v-if="guest.checkedIn" @click="changeStatus">Check out</button>
+
+    <EditGuest v-if="showForm" :guest="guest" />
+
+    <button v-if="!showForm" @click="toggleForm">Show Edit Form</button>
+    <button v-if="showForm" @click="toggleForm">Hide Edit Form</button>
+
+    <div v-if="!showForm">
+      <button v-if="!guest.checkedIn" @click="changeStatus">Check in</button>
+      <button v-if="guest.checkedIn" @click="changeStatus">Check out</button>
+    </div>
+
     <button @click="removeGuest">Delete</button>
   </div>
 </template>
 
 <script>
-import {eventBus} from '@/main.js'
-import Service from '@/services/Service.js'
+import {eventBus} from '@/main.js';
+import Service from '@/services/Service.js';
+import EditGuest from '@/components/EditGuest';
+
 export default {
   name: "guest-card",
   props: ["guest"],
+  data(){
+    return {
+      showForm: false
+    }
+  },
   methods: {
     removeGuest() {
       Service.deleteGuest(this.guest._id)
@@ -26,8 +42,23 @@ export default {
     },
 
     changeStatus(){
-      
+      this.guest.checkedIn ? this.guest.checkedIn=false : this.checkedIn=true;
+
+      const id = this.guest._id;
+      const newStatus = {
+        checkedIn:this.guest.checkedIn};
+
+      Service.editGuest(newStatus)
+      .then (editedGuest => eventBus.$emit('guest-edited', editedGuest));
+    },
+
+    toggleForm(){
+      this.showForm ? this.showForm=false : this.showForm=true;
     }
+
+  },
+  components:{
+    EditGuest
   }
 }
 </script>
