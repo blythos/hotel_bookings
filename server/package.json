@@ -9,7 +9,7 @@
     "server:dev": "nodemon server.js",
     "seeds": "mongo < db/seeds.js"
   },
-  "dependences": {
+  "dependencies": {
     "body-parser": "^1.19.0",
     "core-js": "^2.6.5",
     "cors": "^2.8.5",
