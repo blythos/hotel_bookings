@@ -17,9 +17,9 @@ export default {
       method: 'DELETE'
     });
   },
-  editGuest(payload) {
+  editGuest(payload, id) {
     return fetch(baseURL + id, {
-      method: 'UPDATE',
+      method: 'PUT',
       body: JSON.stringify(payload),
       headers: { 'Content-Type': 'application/json'}
     }).then(res => res.json());

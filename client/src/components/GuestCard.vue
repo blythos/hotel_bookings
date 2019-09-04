@@ -42,13 +42,13 @@ export default {
     },
 
     changeStatus(){
-      this.guest.checkedIn ? this.guest.checkedIn=false : this.checkedIn=true;
+      this.guest.checkedIn ? this.guest.checkedIn=false : this.guest.checkedIn=true;
 
       const id = this.guest._id;
       const newStatus = {
         checkedIn:this.guest.checkedIn};
 
-      Service.editGuest(newStatus)
+      Service.editGuest(newStatus, this.guest._id)
       .then (editedGuest => eventBus.$emit('guest-edited', editedGuest));
     },
 

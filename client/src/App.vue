@@ -21,6 +21,10 @@ export default {
       guests: []
     }
   },
+  updated() {
+    Service.getGuests()
+    .then(guests => this.guests = guests)
+  },
   mounted() {
     Service.getGuests()
     .then(guests => this.guests = guests)

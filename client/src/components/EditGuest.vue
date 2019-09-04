@@ -1,6 +1,6 @@
 <template lang="html">
   <form id="guest-edit-form" v-on:submit="handleEditSubmit">
-    <h2>Add a new guest:</h2>
+    <h2>Edit guest</h2>
 
     <div class="formItem">
       <label for="name">Enter name:</label>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import Service from '@/services/Service.js'
+import {eventBus} from '@/main.js'
 export default {
   name: 'edit-guest',
   data() {
@@ -42,14 +44,14 @@ export default {
         checkedIn: this.checkedIn
       }
 
-      Service.editGuest(guest)
+      Service.editGuest(guest, this.guest._id)
       .then(res => eventBus.$emit('guest-edited', res))
 
       Service.getGuests()
 
     }
 
-  }
+  },
   props: ['guest']
 }
 </script>
