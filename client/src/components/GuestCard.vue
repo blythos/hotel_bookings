@@ -29,7 +29,7 @@ export default {
 <style lang="css" scoped>
 .listItem{
   border: 2px black solid;
-  border-width: 4px;
+  border-radius: 4px;
 }
 
 .checkedIn{

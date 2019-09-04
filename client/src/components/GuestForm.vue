@@ -43,7 +43,7 @@ export default {
         email: this.email,
         checkedIn: this.checkedIn
       }
-      
+
       Service.addGuest(guest)
       .then(res => eventBus.$emit('guest-added', res))
 
