@@ -33,6 +33,13 @@ export default {
       let index = this.guests.findIndex(guest => guest._id === id);
       this.guests.splice(index, 1);
     })
+
+    eventBus.$on('guest-edited', (updatedGuest) => {
+      let index = this.guests.findIndex(guest => guest._id === updatedGuest._id);
+      this.guests[index] = updatedGuest;
+    })
+
+
   },
   components:{
     GuestForm,
