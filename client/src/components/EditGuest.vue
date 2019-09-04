@@ -1,20 +1,20 @@
 <template lang="html">
-  <form id="guest-edit-form" v-on:submit="handleAddSubmit">
+  <form id="guest-edit-form" v-on:submit="handleEditSubmit">
     <h2>Add a new guest:</h2>
 
     <div class="formItem">
       <label for="name">Enter name:</label>
-      <input :value="this.guest.name" type="text" id="name" v-model="name">
+      <input required type="text" id="name" v-model="name">
     </div>
 
     <div class="formItem">
       <label for="email">Enter email address:</label>
-      <input :value="this.guest.email" type="text" id="email" v-model="email">
+      <input required type="email" id="email" v-model="email">
     </div>
 
     <div class="formItem">
       <label for="checkedIn">Checked In?</label>
-      <input value="this.guest.email" type="checkbox" id="checkedIn" v-model="checkedIn">
+      <input type="checkbox" id="checkedIn" v-model="checkedIn">
     </div>
 
     <input type="submit" value="Save" />
@@ -25,6 +25,31 @@
 <script>
 export default {
   name: 'edit-guest',
+  data() {
+    return {
+      name: this.guest.name,
+      email: this.guest.email,
+      checkedIn: this.guest.checkedIn
+    }
+  },
+  methods: {
+    handleEditSubmit(e){
+      e.preventDefault();
+
+      const guest = {
+        name: this.name,
+        email: this.email,
+        checkedIn: this.checkedIn
+      }
+
+      Service.editGuest(guest)
+      .then(res => eventBus.$emit('guest-edited', res))
+
+      Service.getGuests()
+
+    }
+
+  }
   props: ['guest']
 }
 </script>
