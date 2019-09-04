@@ -13,8 +13,8 @@
     </div>
 
     <div class="formItem">
-      <label for="checkIn">Checked In?</label>
-      <input type="checkbox" id="checkIn" v-model="checkIn">
+      <label for="checkedIn">Checked In?</label>
+      <input type="checkbox" id="checkedIn" v-model="checkedIn">
     </div>
 
     <input type="submit" value="Save" />
@@ -29,7 +29,7 @@ export default {
     return {
       name: "",
       email: "",
-      checkIn: false
+      checkedIn: false
     }
   },
   methods: {
@@ -39,10 +39,14 @@ export default {
       const guest = {
         name: this.name,
         email: this.email,
-        checkIn: this.checkIn
+        checkedIn: this.checkedIn
       }
 
       //fetch request to POST
+
+
+      this.name = this.email = "";
+      this.checkedIn=false;
 
     }
 
@@ -51,6 +55,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+form{
+  background-color: lightblue;
+}
 label{
   min-width: 20%;
   display: inline-block;

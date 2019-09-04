@@ -2,7 +2,7 @@
   <div class="">
     <h1>Chez Codeclan</h1>
     <GuestForm />
-    <GuestsList />
+    <GuestsList :guests="guests"/>
 
   </div>
 
@@ -14,6 +14,11 @@ import GuestsList from './components/GuestsList';
 
 export default {
   name: 'app',
+  data(){
+    return{
+      guests: []
+    }
+  },
   components:{
     GuestForm,
     GuestsList
