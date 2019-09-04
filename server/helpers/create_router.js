@@ -30,7 +30,7 @@ const createRouter = function (collection) {
     const newBooking = req.body;
     collection.insertOne(newBooking)
     .then(doc => res.json(doc.ops[0]))
-    .catch(err => dealWithError(err, res))
+    .catch(err => dealWithError(err, res));
   });
 
   // DESTROY
@@ -38,9 +38,22 @@ const createRouter = function (collection) {
     const id = req.params.id;
     collection.deleteOne({ _id: ObjectID(id) })
     .then(doc => res.json(doc))
+    .catch(err => dealWithError(err, res));
   });
 
-  
+  // UPDATE
+  router.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const updatedBooking = req.body;
+    collection.findOneAndUpdate(
+      { _id: ObjectID(id)},
+      {$set: updatedBooking},
+      {returnOriginal: false}
+    )
+    .then(result => res.json(result.value))
+    .catch(err => dealWithError(err, res));
+  });
+
 
 
   return router;
