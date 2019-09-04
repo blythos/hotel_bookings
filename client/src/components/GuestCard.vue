@@ -1,10 +1,13 @@
 <template lang="html">
+  <div>
 
+  </div>
 </template>
 
 <script>
 export default {
-  name: "guest-card"
+  name: "guest-card",
+  props: ['guest']
 }
 </script>
 

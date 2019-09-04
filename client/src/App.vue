@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import Service from "./services/Service.js"
 import GuestForm from './components/GuestForm';
 import GuestsList from './components/GuestsList';
 
@@ -18,6 +19,10 @@ export default {
     return{
       guests: []
     }
+  },
+  mounted() {
+    Service.getGuests()
+    .then(guests => this.guests = guests)
   },
   components:{
     GuestForm,
