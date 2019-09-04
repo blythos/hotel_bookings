@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     checkedInGuests(){
-      this.guests.map((guest) => {
+      return this.guests.filter((guest) => {
         return guest.checkedIn
       })
     }
