@@ -7,6 +7,8 @@
       <p v-if="guest.checkedIn">Yes!</p>
       <p v-if="!guest.checkedIn">Not yet...</p>
     </div>
+    <button v-if="!guest.checkedIn" @click="changeStatus">Check in</button>
+    <button v-if="guest.checkedIn" @click="changeStatus">Check out</button>
     <button @click="removeGuest">Delete</button>
   </div>
 </template>
@@ -21,6 +23,10 @@ export default {
     removeGuest() {
       Service.deleteGuest(this.guest._id)
       .then(() => eventBus.$emit('guest-deleted', this.guest._id))
+    },
+
+    changeStatus(){
+      
     }
   }
 }
